@@ -19,7 +19,7 @@ import math as m
 
 class Point(np.ndarray):
     """
-    Class for generic 2D or 3D point based on ndarray
+    Class for generic 2D or 3D point based on numpy's ndarray
     """
 
     def __new__(cls, input_array = [0.0, 0.0], tag = None, data_type = np.float64):
@@ -39,6 +39,7 @@ class Point(np.ndarray):
         if obj is None: return
         self.tag = getattr(obj, "tag", None)
 
+
     # representations
     def __str__(self):
         return "Point: {0} with tag {1}".format(self.listc, self.tag)
@@ -46,6 +47,7 @@ class Point(np.ndarray):
     def __repr__(self):
         return "Point({0}, tag=\"{1}\", data_type=np.{2})".format(repr(tuple(self)), self.tag, self.dtype)
 
+    # getters and setters
     @property
     def x(self):
         return self[0]
@@ -76,7 +78,8 @@ class Point(np.ndarray):
         else:
             self[2] = value
 
-    # operations
+
+    # equalities
     def __eq__(self, other):
         return np.array_equal(self, other)
 
@@ -166,6 +169,7 @@ def testPoint():
 
     # slicing
     assert p3[:2] == p1
+    assert p3[:2].tag == "test Point 3"
 
     # __repr__ and __str__
     assert eval(repr(p1)) == p1
