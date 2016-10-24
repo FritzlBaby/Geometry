@@ -98,7 +98,13 @@ class Point(np.ndarray):
         return [i for i in self]
 
 
-
+class Polygon(Point):
+    """
+    Basic Polygon class based on array of Points
+    """
+    def __init__(self, vertices = [Point([0.0, 0.0]), Point([10.0, 0.0]), Point([0.0, 10.0])] ):
+        if len(vertices) < 3:
+            raise ValueError("Polygon must have at least three Points -> attempted: {0}".format(len(vertices)))
 
 
 
@@ -118,7 +124,7 @@ def testPoint():
 
     ########
     # test area
-    # slicing
+    #
     #
     ########
 
@@ -154,7 +160,6 @@ def testPoint():
     p1 *= 1/3.0
     assert p1*p2 == [2.0, 6.0]
 
-
     # list comprehension
     assert p1 == [i for i in p1]
     assert p1.listc() == [1.0, 2.0]
@@ -178,8 +183,17 @@ def testPoint():
     print "Point passed!"
 
 
+def testPolygon():
+    P1 = Polygon()
+
+    
+
+    print "Polygon Passed!"
+
+
 if __name__ == "__main__":
     testPoint()
+    testPolygon()
 
 
 ########################################
