@@ -97,14 +97,27 @@ class Point(np.ndarray):
     def listc(self):
         return [i for i in self]
 
+    def bearing(self, other):
+        """
+        Returns gird north bearing of other relative to self
+        """
 
-class Polygon(Point):
-    """
-    Basic Polygon class based on array of Points
-    """
-    def __init__(self, vertices = [Point([0.0, 0.0]), Point([10.0, 0.0]), Point([0.0, 10.0])] ):
-        if len(vertices) < 3:
-            raise ValueError("Polygon must have at least three Points -> attempted: {0}".format(len(vertices)))
+    def _quad(self, other):
+        """
+        internal function to return quad of other relatiev to self
+        """
+        if other.x >= self.x:
+            if other.y >= self.y:
+                _quad = 1
+            else:
+                _quad = 2
+        else:
+            if other.y >= self.y:
+                _quad = 4
+            else:
+                _quad = 3
+       return _quad
+
 
 
 
